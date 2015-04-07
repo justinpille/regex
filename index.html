@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Regex</title>
+  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <link rel="stylesheet" href="css/reset.css" />
+  <style>
+    body {
+      width: 800px;
+      margin: 0 auto;
+      padding-top: 100px;
+      font-size: 2em;
+    }
+
+    input {
+      height: 2em;
+    }
+    p {
+      font-size: 0.6em;
+    }
+
+    #eval {
+      text-align: center;
+      margin: 25px;
+      font-size: 4em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>|------Regular Expression------|</h1>
+  <br />
+  /
+  <input onkeyup="update();" id="pattern" type="text" value="Pattern" /> /
+  <input onkeyup="update();" id="flags" type="text" value="Flags" /> .test(
+  <input onkeyup="update();" id="string" type="text" value="String" /> )
+  <br /><br />
+  <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#Parameters">Flags</a> can be any combinatinon of g, i, m, or y.</p>
+  <div id="eval"></div>
+  <script>
+    function update() {
+      var pattern = $('#pattern').val();
+      var flags = $('#flags').val();
+      var string = $('#string').val();
+      if (flags === "Flags") {
+        flags = undefined;
+      }
+      var re = new RegExp(pattern, flags);
+      eval(re, string);
+    }
+
+    function eval(regex, string) {
+      var eval = regex.test(string);
+      show(eval);
+    }
+
+    function show(t) {
+      $('#eval').html('=' + t);
+    }
+  </script>
+</body>
+
+</html>
